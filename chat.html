@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Правовой Щит | ИИ-ассистент по анализу договоров</title>
+    <meta name="description"
+        content="Автоматизированный анализ и генерация бизнес-договоров для юристов и компаний. Выявление юридических рисков, сравнение версий, генерация документов (.docx, .pdf).">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="Style.css">
+</head>
+<body style="overflow: hidden;">
+    
+    <!-- Background Elements -->
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <div class="chat-layout">
+        <!-- Левое меню: История -->
+        <aside class="chat-sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-scale-balanced"></i>
+                <span class="logo-text">Правовой<span class="logo-accent">Щит</span></span>
+            </div>
+            
+            <a href="index.html" class="btn btn-outline" style="margin-top: 30px; padding: 10px; font-size: 0.9rem;">
+                <i class="fa-solid fa-arrow-left"></i> На главную
+            </a>
+            
+            <div style="margin-top: 30px; font-weight: 600; color: var(--text-secondary); font-size: 0.85rem; text-transform: uppercase;">Моя работа</div>
+            <div class="history-list">
+                <div class="history-item active">
+                    <i class="fa-solid fa-file-contract"></i> Новый анализ договора
+                </div>
+                <div class="history-item">
+                    <i class="fa-solid fa-clock-rotate-left"></i> История проверок
+                </div>
+                <div class="history-item">
+                    <i class="fa-solid fa-file-signature"></i> Шаблоны (IT, Услуги...)
+                </div>
+                <div class="history-item">
+                    <i class="fa-solid fa-code-compare"></i> Сравнение версий
+                </div>
+            </div>
+        </aside>
+
+        <!-- Основной экран: Чат -->
+        <main class="chat-main">
+            <header class="chat-header">
+                <div style="font-weight: 600; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-robot" style="color: var(--accent-blue);"></i> 
+                    ИИ-Ассистент "Правовой Щит"
+                </div>
+                <button class="btn btn-outline" style="padding: 8px 16px; font-size: 0.85rem;" onclick="togglePanel('rightPanel')">
+                    <i class="fa-regular fa-file-word"></i> Аналитика и Риски
+                </button>
+            </header>
+
+            <div class="chat-messages" id="chatMessages">
+                <!-- Приветствие -->
+                <div class="message">
+                    <div class="avatar ai"><i class="fa-solid fa-robot"></i></div>
+                    <div class="message-content">
+                        Здравствуйте! Я ИИ-ассистент по договорному праву "Правовой Щит".<br><br>
+                        Загрузите договор (.docx или .pdf), и я проведу полный анализ: проверю предмет договора, сроки, штрафы, форс-мажор и конфиденциальность. Также я могу сравнить разные версии одного договора.
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <div class="chat-input-wrapper">
+                    <button class="chat-action-btn" title="Прикрепить договор" onclick="openModal('uploadModal')">
+                        <i class="fa-solid fa-paperclip"></i>
+                    </button>
+                    <textarea class="chat-input" id="chatInputArea" placeholder="Введите ваш запрос..." rows="1" onkeypress="handleKeyPress(event)"></textarea>
+                    <button class="chat-send-btn" onclick="sendMessage()">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-secondary); text-align: center; margin-top: 8px;">
+                    ИИ генерирует проекты документов. Всегда проверяйте юридические риски.
+                </div>
+            </div>
+        </main>
+
+        <!-- Правая панель: Аналитика -->
+        <aside class="chat-right-panel" id="rightPanel">
+            <div class="panel-header">
+                <span>Аналитика и Риски</span>
+                <button class="chat-action-btn" onclick="togglePanel('rightPanel')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="analytics-tabs" style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <button class="tab-btn active" style="flex: 1; padding: 8px; border: 1px solid var(--glass-border); background: var(--glass-bg); color: var(--text-primary); border-radius: 8px; cursor: pointer;">Риски</button>
+                <button class="tab-btn" style="flex: 1; padding: 8px; border: 1px solid var(--glass-border); background: transparent; color: var(--text-secondary); border-radius: 8px; cursor: pointer;">Изменения (0)</button>
+            </div>
+
+            <div class="document-preview" id="analytics-content">
+                <div class="placeholder-text" id="analyticsPlaceholder" style="text-align: center; color: var(--text-secondary); margin-top: 50px;">
+                    <i class="fa-solid fa-file-shield" style="font-size: 3rem; margin-bottom: 20px; opacity: 0.5;"></i>
+                    <br>
+                    Загрузите договор для получения аналитики
+                </div>
+                
+                <!-- Этот блок появится после загрузки (эмуляция) -->
+                <div id="risk-analysis-results" style="display: none;">
+                    
+                    <div class="text-line highlight-red">
+                        <span class="warning-icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                        <div><strong>Высокий риск: П. 4.3 (Штрафы)</strong><br><span style="font-size:0.85rem">Несбалансированная ответственность. Пеня за просрочку поставки для Поставщика 0.5% в день, а для Покупателя - 0.1%.</span></div>
+                    </div>
+                    <div style="height: 10px;"></div>
+                    <div class="text-line highlight-green">
+                        <span class="success-icon"><i class="fa-solid fa-circle-exclamation" style="color: #f59e0b;"></i></span>
+                         <div><strong>Средний риск: П. 8.1 (Форс-мажор)</strong><br><span style="font-size:0.85rem">Расплывчатая формулировка обстоятельств. Рекомендуется конкретизировать список.</span></div>
+                    </div>
+                     <div style="height: 10px;"></div>
+                    <div class="text-line highlight-green" style="border-color: rgba(59, 130, 246, 0.2); background: rgba(59, 130, 246, 0.1);">
+                        <span class="success-icon"><i class="fa-solid fa-circle-info" style="color: #3b82f6;"></i></span>
+                         <div><strong>Замечание: П. 10.2 (Подсудность)</strong><br><span style="font-size:0.85rem">Споры рассматриваются по месту нахождения Истца.</span></div>
+                    </div>
+
+                    
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 20px; font-size: 0.9rem;" onclick="generateProtocol()">
+                        <i class="fa-solid fa-file-word"></i> Протокол разногласий
+                    </button>
+                </div>
+                
+                <div id="generation-results" style="display: none;">
+                   <h3 style="color: #000; font-family: serif; text-align: center; margin-bottom: 20px;">ПРОТОКОЛ РАЗНОГЛАСИЙ</h3>
+                        <p style="color: #333; font-family: serif; font-size: 0.9rem; line-height: 1.5;">
+                            К Договору поставки №__ от __.__.20__ г.<br><br>
+                            <strong>Редакция Покупателя:</strong><br>
+                            Пункт 4.3 изложить в следующей редакции:<br>
+                            "За нарушение сроков оплаты Товара Покупатель уплачивает Поставщику неустойку в размере 0.5% от суммы неоплаченного в срок Товара за каждый день просрочки."
+                        </p>
+                        <button class="btn btn-primary" style="width: 100%; margin-top: 20px; font-size: 0.9rem;">
+                        <i class="fa-solid fa-download"></i> Скачать .docx
+                    </button>
+                 </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Общие Модалки -->
+    <div class="modal-overlay" id="uploadModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Загрузка договора на анализ</span>
+                <button class="modal-close" onclick="closeModal('uploadModal')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="upload-zone" id="dropZone" onclick="simulateUpload()">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <h3 style="margin-bottom: 8px;">Выберите файл: PDF или DOCX</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">(Или перетащите сюда)</p>
+            </div>
+            <div id="uploadProgress" style="display: none; text-align: center; padding: 20px 0;">
+                <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; color: var(--accent-blue); margin-bottom: 10px;"></i>
+                <p>ИИ анализирует договор...</p>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function togglePanel(id) {
+            const panel = document.getElementById(id);
+            panel.classList.toggle('open');
+        }
+
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        function scrollToBottom() {
+            const messages = document.getElementById('chatMessages');
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function handleKeyPress(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInputArea');
+            const message = input.value.trim();
+            if (message === '') return;
+
+            const messages = document.getElementById('chatMessages');
+            
+            // Add User Message
+            messages.innerHTML += `
+                <div class="message user fade-in-up">
+                    <div class="avatar user"><i class="fa-solid fa-user"></i></div>
+                    <div class="message-content">
+                        ${message}
+                    </div>
+                </div>
+            `;
+            
+            input.value = '';
+            scrollToBottom();
+
+             // Show typing indicator
+            const typingIndicator = document.createElement('div');
+            typingIndicator.className = 'message fade-in-up';
+            typingIndicator.id = 'typing-indicator';
+            typingIndicator.innerHTML = `
+                <div class="avatar ai"><i class="fa-solid fa-robot"></i></div>
+                <div class="message-content">
+                    <i class="fa-solid fa-circle fa-beat" style="font-size: 0.5rem; color: var(--text-secondary);"></i>
+                    <i class="fa-solid fa-circle fa-beat" style="font-size: 0.5rem; color: var(--text-secondary); margin: 0 4px; animation-delay: 0.1s;"></i>
+                    <i class="fa-solid fa-circle fa-beat" style="font-size: 0.5rem; color: var(--text-secondary); animation-delay: 0.2s;"></i>
+                </div>
+            `;
+            messages.appendChild(typingIndicator);
+            scrollToBottom();
+
+             setTimeout(() => {
+                    document.getElementById('typing-indicator').remove();
+                    let responseHTML = '';
+                    
+                    if (message.toLowerCase().includes('договор') || message.toLowerCase().includes('проверь')) {
+                        responseHTML = `
+                            <div class="ai-block analysis">
+                                <div class="ai-block-title">Первичный анализ</div>
+                                Понял вас. Пожалуйста, загрузите договор для проверки. Я обращу внимание на ключевые аспекты: предмет, сроки, ответственность, форс-мажор и конфиденциальность.
+                            </div>
+                            <div class="ai-block tools">
+                                <div class="ai-block-title">Доступные действия</div>
+                                <div class="chat-tools">
+                                    <span class="tool-chip" onclick="openModal('uploadModal')"><i class="fa-solid fa-upload"></i> Загрузить документ (.docx)</span>
+                                </div>
+                            </div>
+                        `;
+                    } else if (message.toLowerCase().includes('it') || message.toLowerCase().includes('разработ')) {
+                         responseHTML = `
+                            <div class="ai-block analysis">
+                                <div class="ai-block-title">Шаблон IT-договора</div>
+                                Отлично. Для договора на разработку ПО (IT-сектор) нам необходимо согласовать следующие ключевые моменты: ТЗ, порядок передачи исключительных прав (отчуждение или лицензия), этапы оплаты и ответственность за срывы сроков.
+                            </div>
+                            <div class="ai-block plan">
+                                <div class="ai-block-title">Ключевые вопросы (1/3)</div>
+                                Кому будут принадлежать исключительные права на код после завершения работ: Вашей компании (Заказчику) или Исполнителю?
+                            </div>
+                        `;
+                    } else {
+                        responseHTML = `
+                            <div class="ai-block analysis">
+                                <div class="ai-block-title">Ответ</div>
+                                Понял вас. Вы хотите проанализировать существующий договор или необходимо составить новый документ (например, договор поставки, оказания услуг или инвестиционный договор)?
+                            </div>
+                        `;
+                    }
+                    
+                    messages.innerHTML += `
+                        <div class="message fade-in-up">
+                            <div class="avatar ai"><i class="fa-solid fa-robot"></i></div>
+                            <div class="message-content">
+                                ${responseHTML}
+                            </div>
+                        </div>
+                    `;
+                    scrollToBottom();
+            }, 1500);
+
+        }
+
+
+        function simulateUpload() {
+            document.getElementById('dropZone').style.display = 'none';
+            document.getElementById('uploadProgress').style.display = 'block';
+            
+            setTimeout(() => {
+                closeModal('uploadModal');
+                document.getElementById('dropZone').style.display = 'block';
+                document.getElementById('uploadProgress').style.display = 'none';
+                
+                const messages = document.getElementById('chatMessages');
+                messages.innerHTML += `
+                    <div class="message user fade-in-up">
+                        <div class="avatar user"><i class="fa-solid fa-user"></i></div>
+                        <div class="message-content">
+                            <i class="fa-solid fa-file-contract" style="font-size: 2rem; color: var(--text-secondary); margin-bottom: 10px; display: block;"></i>
+                            Загружен договор: contract_v2.docx
+                        </div>
+                    </div>
+                `;
+                
+                setTimeout(() => {
+                    messages.innerHTML += `
+                        <div class="message fade-in-up">
+                            <div class="avatar ai"><i class="fa-solid fa-robot"></i></div>
+                            <div class="message-content" style="border-left: 3px solid var(--accent-blue);">
+                                <b>Результат анализа договора</b><br/><br/>
+                                Договор проанализирован. <b>Выявлено 1 критический риск и 1 замечание средней важности</b>. <br>
+                                Подробный отчет сформирован в Панели Аналитики справа.
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Show analytics
+                    document.getElementById('analyticsPlaceholder').style.display = 'none';
+                    document.getElementById('generation-results').style.display = 'none';
+                    document.getElementById('risk-analysis-results').style.display = 'block';
+                    document.getElementById('rightPanel').classList.add('open');
+
+                    scrollToBottom();
+                }, 1500);
+            }, 2000);
+        }
+
+        function generateProtocol() {
+            const messages = document.getElementById('chatMessages');
+            messages.innerHTML += `
+                <div class="message fade-in-up">
+                    <div class="avatar ai"><i class="fa-solid fa-robot"></i></div>
+                    <div class="message-content" style="border-left: 3px solid var(--accent-purple);">
+                        <i class="fa-solid fa-check-circle" style="color: var(--accent-green);"></i> <b>Протокол разногласий сгенерирован!</b><br/><br/>
+                        Основываясь на найденных рисках я сгенерировал правки. Пожалуйста, ознакомьтесь с черновиком в правой панели.
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('analyticsPlaceholder').style.display = 'none';
+            document.getElementById('risk-analysis-results').style.display = 'none';
+            document.getElementById('generation-results').style.display = 'block';
+
+            scrollToBottom();
+        }
+    </script>
+</body>
+</html>

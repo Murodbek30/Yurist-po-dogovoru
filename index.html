@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Правовой Щит | ИИ-ассистент по анализу договоров</title>
+    <meta name="description"
+        content="Автоматизированный анализ и генерация бизнес-договоров для юристов и компаний. Выявление юридических рисков, сравнение версий, генерация документов (.docx, .pdf).">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="Style.css">
+</head>
+
+<body>
+
+    <!-- Background Elements -->
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fa-solid fa-scale-balanced"></i>
+                <span class="logo-text">Правовой<span class="logo-accent">Щит</span></span>
+            </div>
+            <nav class="nav">
+                <a href="#how-it-works">Как это работает</a>
+                <a href="#advantages">Преимущества</a>
+                <a href="#contact" class="btn btn-outline">Связаться</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-container">
+            <div class="hero-content fade-in-up">
+                <div class="badge">Ваш ИИ-помощник в договорном праве</div>
+                <h1 class="hero-title">Автоматизированный анализ и генерация <br /><span
+                        class="text-gradient">бизнес-договоров</span></h1>
+                <p class="hero-subtitle">Система анализирует тексты договоров, выявляет скрытые юридические и финансовые риски, сравнивает редакции и предлагает конкретные формулировки для правок.</p>
+
+                <div class="cta-group">
+                    <a href="chat.html" class="btn btn-primary btn-telegram"
+                        style="background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);">
+                        <i class="fa-solid fa-robot"></i>
+                        Запустить ИИ-Ассистента
+                    </a>
+                </div>
+                <p class="privacy-note"><i class="fa-solid fa-lock"></i> 100% конфиденциально и безопасно</p>
+            </div>
+
+            <div class="hero-visual fade-in-up" style="animation-delay: 0.2s;">
+                <div class="glass-card mockup-card">
+                    <div class="mockup-header">
+                        <div class="dots"><span></span><span></span><span></span></div>
+                        <div class="mockup-title">AI Ассистент</div>
+                    </div>
+                    <div class="mockup-body" style="background: rgba(15, 23, 42, 0.8);">
+                        <div class="text-line highlight-neutral" style="height: auto; display: flex; align-items: flex-start; gap: 12px; color: #F8FAFC; margin-bottom: 12px; padding: 12px; line-height: 1.4; font-size: 0.95rem; background: transparent;">
+                            <span style="color: #3B82F6;"><i class="fa-solid fa-robot"></i></span>
+                            <span>Договор поставки проанализирован. Найдены риски в п. 4.3 (Штрафы).</span>
+                        </div>
+                        <div class="text-line highlight-green" style="margin-bottom: 12px; padding: 12px;">
+                            <span class="success-icon"><i class="fa-solid fa-list-check"></i></span>
+                            <span>План: Подготовлена таблица изменений и предложены корректировки к договору.</span>
+                        </div>
+                        <div class="text-line highlight-red"
+                            style="padding: 12px; background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.2); border-left: 3px solid #3B82F6; color: #F8FAFC;">
+                            <span>Готов сгенерировать новую версию документа (.docx) или отчет по рискам.</span>
+                        </div>
+                    </div>
+                    <div class="scan-line"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2 class="section-title">Как работает <span class="text-gradient">ИИ-ассистент</span></h2>
+                <p class="section-subtitle">Алгоритм поддержки и защиты "Даю + Спрашиваю"</p>
+            </div>
+
+            <div class="steps-grid">
+                <!-- Step 1 -->
+                <div class="glass-card step-card fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    </div>
+                    <h3 class="step-title">Анализ договора</h3>
+                    <p class="step-desc">Загрузите контракт. ИИ проанализирует предмет, сроки, ответственность, подсудность и выявит юридические и финансовые риски.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="glass-card step-card fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <i class="fa-solid fa-code-compare"></i>
+                    </div>
+                    <h3 class="step-title">Оценка изменений</h3>
+                    <p class="step-desc">Автоматическое сравнение различных редакций договора. ИИ сформирует таблицу изменений и укажет, как они влияют на баланс сторон.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="glass-card step-card fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i class="fa-solid fa-file-signature"></i>
+                    </div>
+                    <h3 class="step-title">Генерация и правки</h3>
+                    <p class="step-desc">Создание документов с нуля (для IT, поставок, услуг) и экспорт сгенерированных правок в форматы Word (.docx) или PDF для юристов.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact/Footer Section -->
+    <footer id="contact" class="footer">
+        <div class="container footer-container">
+            <div class="glass-card cta-banner fade-in-up">
+                <h2>Готовы проверить договор на риски?</h2>
+                <p>Начните работу с юридическим ИИ-ассистентом прямо сейчас. Загрузите документ и получите полный структурный анализ за секунды.</p>
+                <div class="cta-group" style="justify-content: center; margin-top: 30px;">
+                    <a href="chat.html" class="btn btn-primary"
+                        style="background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);">
+                        <i class="fa-solid fa-robot"></i>
+                        Начать общение
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="logo">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                    <span class="logo-text">Правовой<span class="logo-accent">Щит</span></span>
+                </div>
+                <p>&copy; 2026 Все права защищены. Сервис умного анализа документов.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple scroll animation and smooth scrolling logic
+        document.addEventListener('DOMContentLoaded', () => {
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Intersection Observer for fade-in animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in-up').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+
+</html>
